@@ -1,6 +1,7 @@
 import Button from '../UI/Button'
 import { TProduct } from '../types/TProduct'
 import Image from './Image'
+import { textSlicer } from '../utils/TextSlicer'
 type TProps = {
   product: TProduct
 }
@@ -15,7 +16,7 @@ const ProductCard = ({ product }: TProps) => {
     <div className="flex flex-col p-3 text-lg text-center border-2 border-black rounded ">
       <Image src={product.imageURL} alt={product.title} className="rounded" />
       <h3 className="m-2 font-bold border border-black rounded ">{title}</h3>
-      <p>{description}</p>
+      <p>{textSlicer(description)}</p>
       <div className="flex gap-2 pt-2 ">
         <span className="w-5 h-5 bg-indigo-600 rounded-full cursor-pointer" />
         <span className="w-5 h-5 bg-red-600 rounded-full cursor-pointer" />
