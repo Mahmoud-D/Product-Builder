@@ -7,11 +7,11 @@ function App() {
     <ProductCard key={product.id} product={product} />
   ))
   return (
-    <div>
-      <div className="grid gap-3 p-2 m-5 rounded sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+    <main className="container mx-auto ">
+      <div className="grid gap-3 p-2 m-5 rounded sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
         {renderProductList}
       </div>
-    </div>
+    </main>
   )
 }
 
