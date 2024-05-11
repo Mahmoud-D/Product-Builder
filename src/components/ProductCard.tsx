@@ -11,11 +11,15 @@ const ProductCard = ({ product }: TProps) => {
     return 'null' // or return a loading spinner, or some fallback UI
   }
 
-  const { title, description, imageURL } = product
+  const { title, description, imageURL, price } = product
   return (
-    <div className="flex flex-col p-3 text-lg text-center border-2 border-black rounded ">
-      <Image src={product.imageURL} alt={product.title} className="rounded" />
-      <h3 className="m-2 font-bold border border-black rounded ">{title}</h3>
+    <div className="flex flex-col p-2 mx-auto text-lg text-center border-2 border-black rounded md:max-w-lg mx-w-sm">
+      <Image
+        src={product.imageURL}
+        alt={product.title}
+        className="w-full rounded-md h-52 lg:object-cover "
+      />
+      <h3 className="mt-5 font-bold border border-black rounded ">{title}</h3>
       <p>{textSlicer(description)}</p>
       <div className="flex gap-2 pt-2 ">
         <span className="w-5 h-5 bg-indigo-600 rounded-full cursor-pointer" />
@@ -23,12 +27,16 @@ const ProductCard = ({ product }: TProps) => {
         <span className="w-5 h-5 bg-green-600 rounded-full cursor-pointer" />
       </div>
 
-      <div className="flex items-center justify-between">
-        <span>$500.00</span>
+      <div className="flex items-center justify-between my-3 ">
+        <span>${price}</span>
 
-        <Image src={imageURL} alt={title} className="w-10 h-10 rounded-full " />
+        <Image
+          src={imageURL}
+          alt={title}
+          className="object-bottom w-10 h-10 rounded-full "
+        />
       </div>
-      <div className="flex items-center justify-between mt-5 space-x-2 ">
+      <div className="flex items-center justify-between space-x-2 ">
         <Button className="bg-indigo-600" width="w-full">
           EDIT
         </Button>
