@@ -5,7 +5,7 @@ type TProps = InputHTMLAttributes<HTMLInputElement>
 function Input({ ...rest }: TProps) {
   return (
     <input
-      className="w-full p-2 border-2 border-gray-600 rounded-md"
+      className="border-[1px] p-3 text-md rounded-md focus:outline-none focus:ring-2 focus:border-indigo-500 focus:ring-indigo-500 border-gray-300 shadow-md"
       {...rest}
     />
   )
