@@ -3,6 +3,25 @@ import { productList } from './data/index'
 import { TProduct } from './types/TProduct'
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const [product, setProduct] = useState<TProduct>({
+    title: '',
+    description: '',
+    imageURL: '',
+    price: '',
+    colors: [],
+    category: {
+      name: '',
+      imageURL: ''
+    }
+  })
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target
+    setProduct((prev) => ({ ...prev, [name]: value }))
+  }
+
   const renderProductList = productList.map((product: TProduct) => (
     <ProductCard key={product.id} product={product} />
   ))
