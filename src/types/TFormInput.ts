@@ -1,6 +1,6 @@
 export type TFormInput = {
   id: string
-  name: string
+  name: 'title' | 'description' | 'price' | 'imageURL'
   label: string
   type: string
 }
