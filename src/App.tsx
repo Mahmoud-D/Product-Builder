@@ -1,6 +1,10 @@
+import { ChangeEvent, useState } from 'react'
 import ProductCard from './components/ProductCard'
-import { productList } from './data/index'
+import { formInputsList, productList } from './data/index'
 import { TProduct } from './types/TProduct'
+import Modal from './UI/Modal'
+import Button from './UI/Button'
+import Input from './UI/Input'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
