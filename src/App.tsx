@@ -8,6 +8,13 @@ function App() {
   ))
   return (
     <main className="container mx-auto ">
+      <Button
+        onClick={openModal}
+        className="mt-5 bg-indigo-600 hover:bg-indigo-800 "
+        width="w-full"
+      >
+        Add
+      </Button>
       <div className="grid gap-3 p-2 m-5 rounded sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
         {renderProductList}
       </div>
