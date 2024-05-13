@@ -6,6 +6,29 @@ function App() {
   const renderProductList = productList.map((product: TProduct) => (
     <ProductCard key={product.id} product={product} />
   ))
+
+  const renderFormInputList = formInputsList.map((input) => (
+    <div className="flex flex-col mb-4 ">
+      <label htmlFor={input.id}>{input.label}</label>
+      <Input
+        type="text"
+        id={input.id}
+        onChange={handleInputChange}
+        name={input.name}
+        value={product[input.name]}
+      />
+    </div>
+  ))
+
+  /* ------ Handlers ------ */
+  const closeModal = () => {
+    setIsOpen(false)
+  }
+
+  const openModal = () => {
+    setIsOpen(true)
+  }
+
   return (
     <main className="container mx-auto ">
       <Button
