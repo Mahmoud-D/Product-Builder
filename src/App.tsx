@@ -31,7 +31,7 @@ function App() {
   ))
 
   const renderFormInputList = formInputsList.map((input) => (
-    <div className="flex flex-col mb-4 ">
+    <div className="flex flex-col mb-4 " key={input.id}>
       <label htmlFor={input.id}>{input.label}</label>
       <Input
         type="text"
