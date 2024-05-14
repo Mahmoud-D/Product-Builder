@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from 'react'
 import ProductCard from './components/ProductCard'
 import { formInputsList, productList } from './data/index'
 import { TProduct } from './types/TProduct'
+import { productObj } from './constants/product'
+
 import Modal from './UI/Modal'
 import Button from './UI/Button'
 import Input from './UI/Input'
@@ -9,17 +11,7 @@ import Input from './UI/Input'
 function App() {
   const [isOpen, setIsOpen] = useState(false)
 
-  const [product, setProduct] = useState<TProduct>({
-    title: '',
-    description: '',
-    imageURL: '',
-    price: '',
-    colors: [],
-    category: {
-      name: '',
-      imageURL: ''
-    }
-  })
+  const [product, setProduct] = useState<TProduct>(productObj)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
