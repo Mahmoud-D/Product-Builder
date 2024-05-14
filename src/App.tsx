@@ -1,5 +1,6 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import ProductCard from './components/ProductCard'
+
 import { formInputsList, productList } from './data/index'
 import { TProduct } from './types/TProduct'
 import { productObj } from './constants/product'
@@ -44,6 +45,14 @@ function App() {
     setIsOpen(true)
   }
 
+  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    console.log(event, product)
+  }
+  const onCancel = () => {
+    setProduct(productObj)
+    closeModal()
+  }
   return (
     <main className="container mx-auto ">
       <Button
@@ -57,6 +66,7 @@ function App() {
         {renderProductList}
       </div>
       <Modal closeModal={closeModal} isOpen={isOpen}>
+        <form onSubmit={submitHandler}>
         {renderFormInputList}
         <div className="flex items-center justify-between space-x-2 ">
           <Button
@@ -67,13 +77,14 @@ function App() {
             Submit
           </Button>
           <Button
-            onClick={closeModal}
+              onClick={onCancel}
             className="bg-gray-600 hover:bg-gray-800 "
             width="w-full"
           >
             Cancel
           </Button>
         </div>
+        </form>
       </Modal>
     </main>
   )
