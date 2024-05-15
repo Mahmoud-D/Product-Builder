@@ -1,18 +1,27 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import ProductCard from './components/ProductCard'
 
-import { formInputsList, productList } from './data/index'
+import { formInputsList, productList, colors } from './data/index'
 import { TProduct } from './types/TProduct'
 import { productObj } from './constants/product'
+import { Terrors } from './types/TErrors'
+import { errorsObj } from './constants/errors'
 
 import Modal from './UI/Modal'
 import Button from './UI/Button'
 import Input from './UI/Input'
+import CircleColor from './UI/CircleColor'
+
+import { productValidation } from './validations'
+import ErrorMessage from './components/ErrorMessage'
+
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
 
   const [product, setProduct] = useState<TProduct>(productObj)
+  const [products, setProducts] = useState<TProduct[]>(productList)
+  const [tempColors, setTempColors] = useState<string[]>([])
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
@@ -36,6 +45,19 @@ function App() {
     </div>
   ))
 
+  const renderColors = colors.map((color) => (
+    <CircleColor
+      key={color}
+      color={color}
+      onClick={() => {
+        if (tempColors.includes(color)) {
+          setTempColors((prev) => prev.filter((c) => c !== color))
+          return
+        }
+        setTempColors((prev) => [...prev, color])
+      }}
+    />
+  ))
   /* ------ Handlers ------ */
   const closeModal = () => {
     setIsOpen(false)
@@ -68,7 +90,22 @@ function App() {
       <Modal closeModal={closeModal} isOpen={isOpen}>
         <form onSubmit={submitHandler}>
         {renderFormInputList}
-        <div className="flex items-center justify-between space-x-2 ">
+          <div className="flex flex-wrap items-center my-2 space-x-2 ">
+            {tempColors.map((color) => (
+              <span
+                key={color}
+                className="p-1 mb-1 mr-1 text-xs text-white rounded-md "
+                style={{ backgroundColor: color }}
+              >
+                {color}
+              </span>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center space-x-2 ">
+            {renderColors}
+          </div>
+
+          <div className="flex items-center justify-between mt-2 space-x-2 ">
           <Button
             onClick={closeModal}
             className="bg-indigo-600 hover:bg-indigo-800 "
