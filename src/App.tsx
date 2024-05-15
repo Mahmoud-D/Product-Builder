@@ -18,6 +18,7 @@ import ErrorMessage from './components/ErrorMessage'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
+  const [errors, setErrors] = useState<Terrors>(errorsObj)
 
   const [product, setProduct] = useState<TProduct>(productObj)
   const [products, setProducts] = useState<TProduct[]>(productList)
@@ -26,9 +27,10 @@ function App() {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
     setProduct((prev) => ({ ...prev, [name]: value }))
+    setErrors((prev) => ({ ...prev, [name]: '' }))
   }
 
-  const renderProductList = productList.map((product: TProduct) => (
+  const renderProductList = products.map((product: TProduct) => (
     <ProductCard key={product.id} product={product} />
   ))
 
@@ -42,6 +44,8 @@ function App() {
         name={input.name}
         value={product[input.name]}
       />
+
+      <ErrorMessage msg={errors[input.name]} />
     </div>
   ))
 
@@ -67,14 +71,34 @@ function App() {
     setIsOpen(true)
   }
 
-  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log(event, product)
-  }
   const onCancel = () => {
     setProduct(productObj)
+    setTempColors([])
+
     closeModal()
   }
+
+  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const { title, price, description, imageURL } = product
+
+    const errors = productValidation({ title, price, description, imageURL })
+
+    const hasError =
+      Object.values(errors).some((value) => value === '') &&
+      Object.values(errors).every((value) => value === '')
+
+    if (!hasError) {
+      setErrors(errors)
+      return
+    }
+    setProduct(productObj)
+    setProducts((prev) => [{ ...product, colors: tempColors }, ...prev])
+    setTempColors([])
+    closeModal()
+  }
+
   return (
     <main className="container mx-auto ">
       <Button
@@ -84,9 +108,11 @@ function App() {
       >
         Add
       </Button>
+
       <div className="grid gap-3 p-2 m-5 rounded sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
         {renderProductList}
       </div>
+
       <Modal closeModal={closeModal} isOpen={isOpen}>
         <form onSubmit={submitHandler}>
         {renderFormInputList}
@@ -107,12 +133,12 @@ function App() {
 
           <div className="flex items-center justify-between mt-2 space-x-2 ">
           <Button
-            onClick={closeModal}
             className="bg-indigo-600 hover:bg-indigo-800 "
             width="w-full"
           >
             Submit
           </Button>
+
           <Button
               onClick={onCancel}
             className="bg-gray-600 hover:bg-gray-800 "
