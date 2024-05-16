@@ -2,6 +2,7 @@ import Button from '../UI/Button'
 import { TProduct } from '../types/TProduct'
 import Image from './Image'
 import { textSlicer } from '../utils/TextSlicer'
+import CircleColor from '../UI/CircleColor'
 type TProps = {
   product: TProduct
 }
@@ -11,7 +12,11 @@ const ProductCard = ({ product }: TProps) => {
     return 'null' // or return a loading spinner, or some fallback UI
   }
 
-  const { title, description, imageURL, price } = product
+  const { title, description, imageURL, price, colors } = product
+
+  const renderColors = colors.map((color) => (
+    <CircleColor key={color} color={color} />
+  ))
   return (
     <div className="flex flex-col p-2 mx-auto text-lg text-center border-2 border-black rounded md:max-w-lg mx-w-sm">
       <Image
@@ -21,10 +26,8 @@ const ProductCard = ({ product }: TProps) => {
       />
       <h3 className="mt-5 font-bold border border-black rounded ">{title}</h3>
       <p>{textSlicer(description)}</p>
-      <div className="flex gap-2 pt-2 ">
-        <span className="w-5 h-5 bg-indigo-600 rounded-full cursor-pointer" />
-        <span className="w-5 h-5 bg-red-600 rounded-full cursor-pointer" />
-        <span className="w-5 h-5 bg-green-600 rounded-full cursor-pointer" />
+      <div className="flex flex-wrap items-center my-2 space-x-2 ">
+        {renderColors}
       </div>
 
       <div className="flex items-center justify-between mt-auto ">
