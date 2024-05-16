@@ -36,7 +36,7 @@ const ProductCard = ({ product }: TProps) => {
           className="object-bottom w-10 h-10 rounded-full "
         />
       </div>
-      <div className="flex items-center justify-between mt-auto space-x-2 ">
+      <div className="flex items-center justify-between mt-4 space-x-2 ">
         <Button className="bg-indigo-600" width="w-full">
           EDIT
         </Button>
