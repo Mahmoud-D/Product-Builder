@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import ProductCard from './components/ProductCard'
 
-import { formInputsList, productList, colors } from './data/index'
+import { formInputsList, productList, colors, categories } from './data/index'
 import { TProduct } from './types/TProduct'
 import { productObj } from './constants/product'
 import { Terrors } from './types/TErrors'
@@ -14,7 +14,7 @@ import CircleColor from './UI/CircleColor'
 
 import { productValidation } from './validations'
 import ErrorMessage from './components/ErrorMessage'
-
+import Select from './UI/Select'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
@@ -23,6 +23,8 @@ function App() {
   const [product, setProduct] = useState<TProduct>(productObj)
   const [products, setProducts] = useState<TProduct[]>(productList)
   const [tempColors, setTempColors] = useState<string[]>([])
+
+  const [selected, setSelected] = useState(categories[0])
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
@@ -115,7 +117,7 @@ function App() {
 
       <Modal closeModal={closeModal} isOpen={isOpen}>
         <form onSubmit={submitHandler}>
-        {renderFormInputList}
+          {renderFormInputList}
           <div className="flex flex-wrap items-center my-2 space-x-2 ">
             {tempColors.map((color) => (
               <span
@@ -127,26 +129,27 @@ function App() {
               </span>
             ))}
           </div>
-          <div className="flex flex-wrap items-center space-x-2 ">
+          <Select selected={selected} setSelected={setSelected} />
+          <div className="flex flex-wrap items-center mt-3 space-x-2 ">
             {renderColors}
           </div>
 
           <div className="flex items-center justify-between mt-2 space-x-2 ">
-          <Button
-            className="bg-indigo-600 hover:bg-indigo-800 "
-            width="w-full"
-          >
-            Submit
-          </Button>
+            <Button
+              className="bg-indigo-600 hover:bg-indigo-800 "
+              width="w-full"
+            >
+              Submit
+            </Button>
 
-          <Button
+            <Button
               onClick={onCancel}
-            className="bg-gray-600 hover:bg-gray-800 "
-            width="w-full"
-          >
-            Cancel
-          </Button>
-        </div>
+              className="bg-gray-600 hover:bg-gray-800 "
+              width="w-full"
+            >
+              Cancel
+            </Button>
+          </div>
         </form>
       </Modal>
     </main>
