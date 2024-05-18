@@ -1,20 +1,22 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import ProductCard from './components/ProductCard'
+import ErrorMessage from './components/ErrorMessage'
 
 import { formInputsList, productList, colors, categories } from './data/index'
+
 import { TProduct } from './types/TProduct'
-import { productObj } from './constants/product'
 import { Terrors } from './types/TErrors'
+
+import { productObj } from './constants/product'
 import { errorsObj } from './constants/errors'
 
 import Modal from './UI/Modal'
 import Button from './UI/Button'
 import Input from './UI/Input'
 import CircleColor from './UI/CircleColor'
+import Select from './UI/Select'
 
 import { productValidation } from './validations'
-import ErrorMessage from './components/ErrorMessage'
-import Select from './UI/Select'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
@@ -64,6 +66,7 @@ function App() {
       }}
     />
   ))
+
   /* ------ Handlers ------ */
   const closeModal = () => {
     setIsOpen(false)
