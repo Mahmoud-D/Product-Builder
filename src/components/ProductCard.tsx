@@ -24,8 +24,12 @@ const ProductCard = ({ product }: TProps) => {
         alt={product.title}
         className="w-full rounded-md h-52 lg:object-cover "
       />
-      <h3 className="mt-5 font-bold border border-black rounded ">{title}</h3>
+      <h3 className="mt-5 font-bold border border-black rounded ">
+        {textSlicer(title, 25)}
+      </h3>
+
       <p>{textSlicer(description)}</p>
+
       <div className="flex flex-wrap items-center my-2 space-x-2 ">
         {renderColors}
       </div>
