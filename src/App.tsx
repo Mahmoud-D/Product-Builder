@@ -1,4 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
+import { v4 as uuid } from 'uuid'
+
 import ProductCard from './components/ProductCard'
 import ErrorMessage from './components/ErrorMessage'
 
