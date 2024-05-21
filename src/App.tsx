@@ -90,6 +90,7 @@ function App() {
   ))
 
   /* ------ Handlers ------ */
+
   const closeModal = () => {
     setIsOpen(false)
   }
@@ -147,8 +148,57 @@ function App() {
       <div className="grid gap-3 p-2 m-5 rounded sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
         {renderProductList}
       </div>
+      {/* ADD Modal */}
+      <Modal closeModal={closeModal} isOpen={isOpen} title="ADD Product">
+        <form onSubmit={submitHandler}>
+          {renderFormInputList}
 
-      <Modal closeModal={closeModal} isOpen={isOpen}>
+          <div className="flex flex-wrap items-center my-2 space-x-2 ">
+            {tempColors.map((color) => (
+              <span
+                key={color}
+                className="p-1 mb-1 mr-1 text-xs text-white rounded-md "
+                style={{ backgroundColor: color }}
+              >
+                {color}
+              </span>
+            ))}
+          </div>
+
+          <Select
+            selected={selectedCategory}
+            setSelected={setSelectedCategory}
+          />
+
+          <div className="flex flex-wrap items-center mt-3 space-x-2 ">
+            {renderColors}
+          </div>
+
+          <div className="flex items-center justify-between mt-2 space-x-2 ">
+            <Button
+              className="bg-indigo-600 hover:bg-indigo-800 "
+              width="w-full"
+            >
+              Submit
+            </Button>
+
+            <Button
+              onClick={onCancel}
+              className="bg-gray-600 hover:bg-gray-800 "
+              width="w-full"
+            >
+              Cancel
+            </Button>
+          </div>
+        </form>
+      </Modal>
+
+      {/* EDIT Modal */}
+      <Modal
+        closeModal={closeEditModal}
+        isOpen={isOpenEditModal}
+        title="Edit This Product"
+      >
         <form onSubmit={submitHandler}>
           {renderFormInputList}
 
