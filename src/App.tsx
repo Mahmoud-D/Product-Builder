@@ -28,7 +28,7 @@ function App() {
   const [products, setProducts] = useState<TProduct[]>(productList)
   const [tempColors, setTempColors] = useState<string[]>([])
 
-  const [selected, setSelected] = useState(categories[0])
+  const [selectedCategory, setSelectedCategory] = useState(categories[0])
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
@@ -101,7 +101,15 @@ function App() {
       return
     }
     setProduct(productObj)
-    setProducts((prev) => [{ ...product, colors: tempColors }, ...prev])
+    setProducts((prev) => [
+      {
+        ...product,
+        id: uuid(),
+        category: selectedCategory,
+        colors: tempColors
+      },
+      ...prev
+    ])
     setTempColors([])
     closeModal()
   }
@@ -123,6 +131,7 @@ function App() {
       <Modal closeModal={closeModal} isOpen={isOpen}>
         <form onSubmit={submitHandler}>
           {renderFormInputList}
+
           <div className="flex flex-wrap items-center my-2 space-x-2 ">
             {tempColors.map((color) => (
               <span
@@ -134,7 +143,12 @@ function App() {
               </span>
             ))}
           </div>
-          <Select selected={selected} setSelected={setSelected} />
+
+          <Select
+            selected={selectedCategory}
+            setSelected={setSelectedCategory}
+          />
+
           <div className="flex flex-wrap items-center mt-3 space-x-2 ">
             {renderColors}
           </div>
