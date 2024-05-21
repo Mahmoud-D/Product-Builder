@@ -26,6 +26,10 @@ function App() {
 
   const [product, setProduct] = useState<TProduct>(productObj)
   const [products, setProducts] = useState<TProduct[]>(productList)
+
+  const [productToEdit, setProductToEdit] = useState<TProduct>(productObj)
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false)
+
   const [tempColors, setTempColors] = useState<string[]>([])
 
   const [selectedCategory, setSelectedCategory] = useState(categories[0])
@@ -35,6 +39,17 @@ function App() {
     setProduct((prev) => ({ ...prev, [name]: value }))
     setErrors((prev) => ({ ...prev, [name]: '' }))
   }
+
+  /* Handler */
+  const closeEditModal = () => {
+    setIsOpenEditModal(false)
+  }
+
+  const openEditModal = () => {
+    setIsOpenEditModal(true)
+  }
+
+  /* Render */
 
   const renderProductList = products.map((product: TProduct) => (
     <ProductCard key={product.id} product={product} />
