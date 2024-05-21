@@ -35,14 +35,18 @@ const ProductCard = ({ product }: TProps) => {
       </div>
 
       <div className="flex items-center justify-between mt-auto ">
-        <span>${price}</span>
+        <span className="text-lg font-semibold text-indigo-600 ">${price}</span>
 
-        <Image
-          src={imageURL}
-          alt={title}
-          className="object-bottom w-10 h-10 rounded-full "
-        />
+        <div className="flex items-center space-x-2">
+          <span className="text-xs font-semibold">{category.name}</span>
+          <Image
+            src={category.imageURL}
+            alt={category.name}
+            className="object-cover w-10 h-10 rounded-full"
+          />
+        </div>
       </div>
+
       <div className="flex items-center justify-between mt-4 space-x-2 ">
         <Button className="bg-indigo-600" width="w-full">
           EDIT
