@@ -52,7 +52,12 @@ function App() {
   /* Render */
 
   const renderProductList = products.map((product: TProduct) => (
-    <ProductCard key={product.id} product={product} />
+    <ProductCard
+      key={product.id}
+      product={product}
+      setProductToEdit={setProductToEdit}
+      openEditModal={openEditModal}
+    />
   ))
 
   const renderFormInputList = formInputsList.map((input) => (
