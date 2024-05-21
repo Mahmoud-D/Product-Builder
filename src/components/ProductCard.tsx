@@ -12,7 +12,7 @@ const ProductCard = ({ product }: TProps) => {
     return 'null' // or return a loading spinner, or some fallback UI
   }
 
-  const { title, description, imageURL, price, colors } = product
+  const { title, description, price, colors, category } = product
 
   const renderColors = colors.map((color) => (
     <CircleColor key={color} color={color} />
