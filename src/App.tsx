@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { v4 as uuid } from 'uuid'
+import toast, { Toaster } from 'react-hot-toast'
 
 import ProductCard from './components/ProductCard'
 import ErrorMessage from './components/ErrorMessage'
@@ -174,7 +175,9 @@ function App() {
       setErrors(errors)
       return
     }
+
     setProduct(productObj)
+
     setProducts((prev) => [
       {
         ...product,
@@ -184,8 +187,52 @@ function App() {
       },
       ...prev
     ])
+
     setTempColors([])
     closeModal()
+
+    toast('Product has been added successfully!', {
+      icon: '👏',
+      style: {
+        backgroundColor: 'black',
+        color: 'white'
+      }
+    })
+  }
+
+  const submitEditHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const { title, price, description, imageURL } = productToEdit
+
+    const errors = productValidation({ title, price, description, imageURL })
+
+    const hasError =
+      Object.values(errors).some((value) => value === '') &&
+      Object.values(errors).every((value) => value === '')
+
+    if (!hasError) {
+      setErrors(errors)
+      return
+    }
+
+    const updatedProducts = [...products]
+    updatedProducts[productToEditIdx] = {
+      ...productToEdit,
+      colors: tempColors.concat(productToEdit.colors)
+    }
+
+    setProducts(updatedProducts)
+    setTempColors([])
+    closeEditModal()
+
+    toast('Product has been updated successfully!', {
+      icon: '👏',
+      style: {
+        backgroundColor: 'black',
+        color: 'white'
+      }
+    })
   }
 
   return (
