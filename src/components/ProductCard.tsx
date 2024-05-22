@@ -1,13 +1,27 @@
 import Button from '../UI/Button'
-import { TProduct } from '../types/TProduct'
-import Image from './Image'
-import { textSlicer } from '../utils/TextSlicer'
 import CircleColor from '../UI/CircleColor'
+import Image from './Image'
+
+import { TProduct } from '../types/TProduct'
+import { textSlicer } from '../utils/TextSlicer'
+
 type TProps = {
   product: TProduct
+  setProductToEdit: (product: TProduct) => void
+  openEditModal: () => void
+  idx: number
+  setProductToEditIdx: (value: number) => void
+  openConfirmModal: () => void
 }
 
-const ProductCard = ({ product }: TProps) => {
+const ProductCard = ({
+  product,
+  setProductToEdit,
+  openEditModal,
+  idx,
+  setProductToEditIdx,
+  openConfirmModal
+}: TProps) => {
   if (!product) {
     return 'null' // or return a loading spinner, or some fallback UI
   }
@@ -17,6 +31,18 @@ const ProductCard = ({ product }: TProps) => {
   const renderColors = colors.map((color) => (
     <CircleColor key={color} color={color} />
   ))
+
+  const onEdit = () => {
+    setProductToEdit(product)
+    openEditModal()
+    setProductToEditIdx(idx)
+  }
+
+  const onRemove = () => {
+    setProductToEdit(product)
+    openConfirmModal()
+  }
+
   return (
     <div className="flex flex-col p-2 mx-auto text-lg text-center border-2 border-black rounded md:max-w-lg mx-w-sm">
       <Image
@@ -48,10 +74,10 @@ const ProductCard = ({ product }: TProps) => {
       </div>
 
       <div className="flex items-center justify-between mt-4 space-x-2 ">
-        <Button className="bg-indigo-600" width="w-full">
+        <Button className="bg-indigo-600" width="w-full" onClick={onEdit}>
           EDIT
         </Button>
-        <Button className="bg-red-600" width="w-full">
+        <Button className="bg-red-600" width="w-full" onClick={onRemove}>
           DELETE
         </Button>
       </div>
