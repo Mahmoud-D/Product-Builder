@@ -10,10 +10,17 @@ type TProps = {
   title?: string
   isOpen: boolean
   closeModal: () => void
+  description?: string
   children?: React.ReactNode
 }
 
-const Modal = ({ isOpen, closeModal, title, children }: TProps) => {
+const Modal = ({
+  isOpen,
+  closeModal,
+  title,
+  description,
+  children
+}: TProps) => {
   return (
     <>
       <Transition appear show={isOpen}>
@@ -47,6 +54,10 @@ const Modal = ({ isOpen, closeModal, title, children }: TProps) => {
                   >
                     {title}
                   </DialogTitle>
+                  {description && (
+                    <p className="my-3 text-sm text-gray-500">{description}</p>
+                  )}
+
                   {children}
                 </DialogPanel>
               </TransitionChild>
