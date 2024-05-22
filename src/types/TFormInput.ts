@@ -1,6 +1,8 @@
+import { TProductName } from './TProductName'
+
 export type TFormInput = {
   id: string
-  name: 'title' | 'description' | 'price' | 'imageURL'
+  name: TProductName
   label: string
   type: string
 }
