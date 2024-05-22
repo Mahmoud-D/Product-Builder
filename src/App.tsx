@@ -142,6 +142,23 @@ function App() {
     closeModal()
   }
 
+  const removeProductHandler = () => {
+    const filtered = products.filter(
+      (product) => product.id !== productToEdit.id
+    )
+
+    setProducts(filtered)
+    closeConfirmModal()
+
+    toast('Product has been deleted successfully!', {
+      icon: '👏',
+      style: {
+        backgroundColor: '#c2344d',
+        color: 'white'
+      }
+    })
+  }
+
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
