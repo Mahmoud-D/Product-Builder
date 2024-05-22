@@ -48,13 +48,16 @@ function App() {
   }
 
   /* Handler */
+  const openEditModal = () => {
+    setIsOpenEditModal(true)
+  }
+
   const closeEditModal = () => {
     setIsOpenEditModal(false)
   }
 
-  const openEditModal = () => {
-    setIsOpenEditModal(true)
-  }
+  const closeConfirmModal = () => setIsOpenConfirmModal(false)
+  const openConfirmModal = () => setIsOpenConfirmModal(true)
 
   /* Render */
 
