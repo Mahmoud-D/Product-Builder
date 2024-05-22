@@ -4,20 +4,20 @@ import { v4 as uuid } from 'uuid'
 import ProductCard from './components/ProductCard'
 import ErrorMessage from './components/ErrorMessage'
 
-import { formInputsList, productList, colors, categories } from './data/index'
-
-import { TProduct } from './types/TProduct'
-import { Terrors } from './types/TErrors'
-
-import { productObj } from './constants/product'
-import { errorsObj } from './constants/errors'
-
 import Modal from './UI/Modal'
 import Button from './UI/Button'
 import Input from './UI/Input'
 import CircleColor from './UI/CircleColor'
 import Select from './UI/Select'
 
+import { TProduct } from './types/TProduct'
+import { Terrors } from './types/TErrors'
+import { TProductName } from './types/TProductName'
+
+import { productObj } from './constants/product'
+import { errorsObj } from './constants/errors'
+
+import { formInputsList, productList, colors, categories } from './data/index'
 import { productValidation } from './validations'
 
 function App() {
