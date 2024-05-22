@@ -41,6 +41,12 @@ function App() {
     setErrors((prev) => ({ ...prev, [name]: '' }))
   }
 
+  const handleEditInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target
+    setProductToEdit((prev) => ({ ...prev, [name]: value }))
+    setErrors((prev) => ({ ...prev, [name]: '' }))
+  }
+
   /* Handler */
   const closeEditModal = () => {
     setIsOpenEditModal(false)
