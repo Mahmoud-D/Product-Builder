@@ -248,6 +248,7 @@ function App() {
       <div className="grid gap-3 p-2 m-5 rounded sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
         {renderProductList}
       </div>
+
       {/* ADD Modal */}
       <Modal closeModal={closeModal} isOpen={isOpen} title="ADD Product">
         <form onSubmit={submitHandler}>
@@ -299,28 +300,36 @@ function App() {
         isOpen={isOpenEditModal}
         title="Edit This Product"
       >
-        <form onSubmit={submitHandler}>
-          {renderFormInputList}
+        <form onSubmit={submitEditHandler}>
+          {renderProductEdit('title', 'Product Title', 'title')}
+          {renderProductEdit(
+            'description',
+            'Product description',
+            'description'
+          )}
+          {renderProductEdit('imageURL', 'Product imageURL', 'imageURL')}
+          {renderProductEdit('id', 'Product price', 'price')}
+          <Select
+            selected={productToEdit.category}
+            setSelected={(value) =>
+              setProductToEdit({ ...productToEdit, category: value })
+            }
+          />
 
-          <div className="flex flex-wrap items-center my-2 space-x-2 ">
-            {tempColors.map((color) => (
+          <div className="flex flex-wrap items-center space-x-1">
+            {renderColors}
+          </div>
+
+          <div className="flex flex-wrap items-center space-x-1">
+            {tempColors.concat(productToEdit.colors).map((color) => (
               <span
                 key={color}
-                className="p-1 mb-1 mr-1 text-xs text-white rounded-md "
+                className="p-1 mb-1 mr-1 text-xs text-white rounded-md"
                 style={{ backgroundColor: color }}
               >
                 {color}
               </span>
             ))}
-          </div>
-
-          <Select
-            selected={selectedCategory}
-            setSelected={setSelectedCategory}
-          />
-
-          <div className="flex flex-wrap items-center mt-3 space-x-2 ">
-            {renderColors}
           </div>
 
           <div className="flex items-center justify-between mt-2 space-x-2 ">
@@ -332,7 +341,7 @@ function App() {
             </Button>
 
             <Button
-              onClick={onCancel}
+              onClick={closeEditModal}
               className="bg-gray-600 hover:bg-gray-800 "
               width="w-full"
             >
