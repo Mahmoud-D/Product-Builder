@@ -26,13 +26,14 @@ function App() {
 
   const [product, setProduct] = useState<TProduct>(productObj)
   const [products, setProducts] = useState<TProduct[]>(productList)
+  const [tempColors, setTempColors] = useState<string[]>([])
+  const [selectedCategory, setSelectedCategory] = useState(categories[0])
 
   const [productToEdit, setProductToEdit] = useState<TProduct>(productObj)
+  const [productToEditIdx, setProductToEditIdx] = useState<number>(0)
   const [isOpenEditModal, setIsOpenEditModal] = useState(false)
 
-  const [tempColors, setTempColors] = useState<string[]>([])
-
-  const [selectedCategory, setSelectedCategory] = useState(categories[0])
+  const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
