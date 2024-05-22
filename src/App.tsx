@@ -73,6 +73,23 @@ function App() {
     />
   ))
 
+  const renderProductEdit = (id: string, label: string, name: TProductName) => {
+    return (
+      <div className="flex flex-col mb-4 ">
+        <label htmlFor={id}>{label}</label>
+        <Input
+          type="text"
+          id={'id'}
+          onChange={handleEditInputChange}
+          name={name}
+          value={productToEdit[name]}
+        />
+
+        <ErrorMessage msg={name} />
+      </div>
+    )
+  }
+
   const renderFormInputList = formInputsList.map((input) => (
     <div className="flex flex-col mb-4 " key={input.id}>
       <label htmlFor={input.id}>{input.label}</label>
