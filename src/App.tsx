@@ -110,8 +110,14 @@ function App() {
       key={color}
       color={color}
       onClick={() => {
+        
         if (tempColors.includes(color)) {
           setTempColors((prev) => prev.filter((c) => c !== color))
+          return
+        }
+
+        if (productToEdit.colors.includes(color)) {
+          setTempColors((prev) => prev.filter((item) => item !== color))
           return
         }
         setTempColors((prev) => [...prev, color])
