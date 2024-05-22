@@ -6,7 +6,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
 type TProps = {
-  selected: TCategory
+  selected: { name: string; imageURL: string }
   setSelected: (category: TCategory) => void
 }
 
