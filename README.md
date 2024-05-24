@@ -1,5 +1,5 @@
 # Product Builder
-<b> React CRUD APP</b> 
+<b> React CRUD APP Mobile first Approach </b>  
 ## Tech Stack
 
 - React
